@@ -1,2 +1,5 @@
-package pbl4.server.session;public class SessionManager {
+package pbl4.server.session;
+
+public class SessionManager {
+
 }
