@@ -42,4 +42,8 @@ public class Server {
             this.getLogger().info("New connection accepted: " + socket.getInetAddress().getHostAddress());
         }
     }
+
+    public void stop() throws IOException {
+        this.server.close();
+    }
 }

@@ -46,6 +46,7 @@ public class Session extends Thread {
             out.writeUTF(result);
         } catch (IOException e) {
             return;
+            //???
         }
         finally {
             try {
