@@ -47,8 +47,7 @@ public class Server {
         this.server = new ServerSocket(this.port);
         this.getLogger().info("Server started on port " + this.port);
         //Listening new connection
-        Socket socket = null;
-        Scanner scanner = new Scanner(System.in);
+        Socket socket;
         while(true){
             try {
                 socket = this.server.accept();
@@ -58,14 +57,6 @@ public class Server {
             }
             new Session(socket).start();
             this.getLogger().info("New connection accepted: " + socket.getInetAddress().getHostAddress());
-
-            //Handle command from input
-            String command = scanner.nextLine();
-            if (command.equals("stop")){
-                this.stop();
-                break;
-            }
-            scanner = scanner.reset();
         }
     }
 
