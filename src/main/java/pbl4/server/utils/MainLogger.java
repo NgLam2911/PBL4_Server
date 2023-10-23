@@ -1,5 +1,8 @@
 package pbl4.server.utils;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class MainLogger {
 
     public enum LogLevel{
@@ -15,16 +18,16 @@ public class MainLogger {
     public void log(LogLevel level, String message){
         switch (level){
             case INFO:
-                System.out.println(TextFormat.asciiFormat(TextFormat.Colors.CYAN, TextFormat.Style.NONE) + "[INFO] " + message);
+                System.out.println(TextFormat.asciiFormat(TextFormat.Colors.CYAN, TextFormat.Style.NONE) + this.timee() + "[INFO] " + message);
                 break;
             case WARNING:
-                System.out.println(TextFormat.asciiFormat(TextFormat.Colors.YELLOW, TextFormat.Style.NONE) + "[WARNING] " + message);
+                System.out.println(TextFormat.asciiFormat(TextFormat.Colors.YELLOW, TextFormat.Style.NONE) + this.timee() + "[WARNING] " + message);
                 break;
             case ERROR:
-                System.out.println(TextFormat.asciiFormat(TextFormat.Colors.RED, TextFormat.Style.NONE) + "[ERROR] " + message);
+                System.out.println(TextFormat.asciiFormat(TextFormat.Colors.RED, TextFormat.Style.NONE) + this.timee() + "[ERROR] " + message);
                 break;
             case DEBUG:
-                System.out.println(TextFormat.asciiFormat(TextFormat.Colors.GRAY, TextFormat.Style.NONE) + "[DEBUG] " + message);
+                System.out.println(TextFormat.asciiFormat(TextFormat.Colors.GRAY, TextFormat.Style.NONE) + this.timee() + "[DEBUG] " + message);
                 break;
         }
     }
@@ -45,5 +48,12 @@ public class MainLogger {
         if (this.debug){
             this.log(LogLevel.DEBUG, message);
         }
+    }
+
+    private String timee(){
+        //Get current date time
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        return "[" + now.format(formatter) + "]";
     }
 }

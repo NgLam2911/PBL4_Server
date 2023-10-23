@@ -17,7 +17,7 @@ public class InputThread extends Thread{
                     Server.getInstance().stop();
                     break;
                 case "say":
-                    Server.getInstance().getLogger().info("[Server]" + String.join(" ", args));
+                    Server.getInstance().getLogger().info("[Server] " + String.join(" ", args));
                     break;
                 case "help":
                     Server.getInstance().getLogger().info("Available commands: stop, say, help");
