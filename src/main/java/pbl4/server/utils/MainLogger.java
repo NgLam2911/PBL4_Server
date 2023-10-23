@@ -6,6 +6,8 @@ public class MainLogger {
         INFO, WARNING, ERROR, DEBUG
     }
 
+    public boolean debug = false;
+
     public MainLogger(){
 
     }
@@ -40,6 +42,8 @@ public class MainLogger {
     }
 
     public void debug(String message){
-        this.log(LogLevel.DEBUG, message);
+        if (this.debug){
+            this.log(LogLevel.DEBUG, message);
+        }
     }
 }
