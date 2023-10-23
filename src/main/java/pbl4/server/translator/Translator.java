@@ -6,7 +6,17 @@ public class Translator{
     public enum Language {
         ENGLISH,
         VIETNAMESE,
-        FRENCH
+        FRENCH;
+
+        public static Language fromString(String lang){
+            lang = lang.toLowerCase();
+            return switch (lang) {
+                case "1", "english", "en", "eng" -> ENGLISH;
+                case "0", "vietnamese", "vi", "vie" -> VIETNAMESE;
+                case "2", "french", "fr", "fra" -> FRENCH;
+                default -> null;
+            };
+        }
     }
 
     //Translator a number to a string

@@ -26,16 +26,24 @@ public class Session extends Thread {
         DataInputStream in;
         DataOutputStream out;
         try {
+
             in = new DataInputStream(this.socket.getInputStream());
             out = new DataOutputStream(this.socket.getOutputStream());
 
             String number = in.readUTF();
             Server.getInstance().getLogger().debug("Received buffer: " + number);
+            String language = in.readUTF();
+            Server.getInstance().getLogger().debug("Received buffer: " + language);
             Translator translator;
             String result;
             try{
                 translator = new Translator(number);
-                result = translator.translate(Translator.Language.VIETNAMESE); //TODO: Include language info in socket
+                Translator.Language lang = Translator.Language.fromString(language);
+                if (lang != null){
+                    result = translator.translate(lang);
+                } else {
+                    result = "Invalid Language";
+                }
                 Server.getInstance().getLogger().debug("Translated result: " + result);
             }catch (NumberFormatException nah){
                 result = "Invalid number";
