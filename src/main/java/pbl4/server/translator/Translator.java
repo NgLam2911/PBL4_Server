@@ -12,22 +12,30 @@ public class Translator{
     //Translator a number to a string
     //For example 1 -> "one"
 
-    private BigInteger number;
+    private final long number;
 
     public Translator(String number) throws NumberFormatException{
-        this.number = new BigInteger(number);
+        this.number = Long.parseLong(number);
     }
 
-    public Translator(BigInteger number){
+    public Translator(long number){
         this.number = number;
     }
 
-    public BigInteger getNumber(){
+    public long getNumber(){
         return this.number;
     }
 
     public String translate(Language language){
         //TODO: Handle this.
-        return this.getNumber().toString();
+        switch (language){
+            case ENGLISH:
+                return EnglishTranslator.translate(this.number);
+            case VIETNAMESE:
+                return VietnameseTranslator.translate(this.number);
+            case FRENCH:
+                return FrenchTranslator.translate(this.number);
+        }
+        return "";
     }
 }

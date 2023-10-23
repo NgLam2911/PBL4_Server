@@ -35,7 +35,7 @@ public class Session extends Thread {
             String result;
             try{
                 translator = new Translator(number);
-                result = translator.translate(Translator.Language.ENGLISH); //TODO: Include language info in socket
+                result = translator.translate(Translator.Language.VIETNAMESE); //TODO: Include language info in socket
                 Server.getInstance().getLogger().debug("Translated result: " + result);
             }catch (NumberFormatException nah){
                 result = "Invalid number";
