@@ -12,7 +12,7 @@ import java.util.UUID;
 public class Session extends Thread {
 
     private final Socket socket;
-    private String id;
+    private final String id;
 
     public Session(Socket clientSocket) {
         super();
@@ -23,6 +23,7 @@ public class Session extends Thread {
 
     @Override
     public void run() {
+        Thread.currentThread().setName("Session");
         DataInputStream in;
         DataOutputStream out;
         try {
@@ -31,9 +32,9 @@ public class Session extends Thread {
             out = new DataOutputStream(this.socket.getOutputStream());
 
             String number = in.readUTF();
-            Server.getInstance().getLogger().debug("Received buffer: " + number);
+            Server.getInstance().getLogger().debug("Received buffer (number): " + number);
             String language = in.readUTF();
-            Server.getInstance().getLogger().debug("Received buffer: " + language);
+            Server.getInstance().getLogger().debug("Received buffer (lang): " + language);
             Translator translator;
             String result;
             try{
@@ -89,9 +90,5 @@ public class Session extends Thread {
     public void onClose(){
         SessionManager.getInstance().removeSession(this);
         Server.getInstance().getLogger().debug("Session closed: " + this.id);
-    }
-
-    public void onReceive(){
-        //TODO: Handle this
     }
 }

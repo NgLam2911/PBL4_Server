@@ -8,7 +8,6 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.Properties;
 
 public class Server {
@@ -58,6 +57,9 @@ public class Server {
             }
             new Session(socket).start();
             this.getLogger().info("New connection accepted: " + socket.getInetAddress().getHostAddress());
+            if (this.server.isClosed()){
+                break;
+            }
         }
     }
 
