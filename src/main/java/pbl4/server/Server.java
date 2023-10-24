@@ -62,7 +62,7 @@ public class Server {
 
     private void loadProperties() {
         Properties prop = new Properties();
-        File file = new File(this.getCurrentPath() + "/server.properties");
+        File file = new File(this.getCurrentPath() + File.separator + "server.properties");
         FileInputStream fin;
         try{
             fin = new FileInputStream(file);
@@ -125,7 +125,7 @@ public class Server {
         prop.setProperty("port", "6996");
         prop.setProperty("maxConnection", "1000");
         prop.setProperty("debug", "true");
-        File file = new File(this.getCurrentPath() + "/server.properties");
+        File file = new File(this.getCurrentPath() + File.separator + "server.properties");
         FileOutputStream fout = new FileOutputStream(file);
         try {
             prop.store(fout, null);
@@ -164,6 +164,6 @@ public class Server {
     }
 
     public String getCurrentPath() {
-        return Objects.requireNonNull(getClass().getResource("/")).getPath();
+        return Objects.requireNonNull(getClass().getResource(File.separator)).getPath();
     }
 }
