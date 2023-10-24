@@ -9,7 +9,7 @@ public class MainLogger {
         INFO, WARNING, ERROR, DEBUG
     }
 
-    public boolean debug = false;
+    public boolean debug = true;
 
     public MainLogger(){
 

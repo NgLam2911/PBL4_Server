@@ -7,6 +7,7 @@ import pbl4.server.utils.MainLogger;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.file.Paths;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -62,7 +63,8 @@ public class Server {
 
     private void loadProperties() {
         Properties prop = new Properties();
-        File file = new File(this.getCurrentPath() + File.separator + "server.properties");
+        String path = this.getCurrentPath() + File.separator + "server.properties";
+        File file = new File(path);
         FileInputStream fin;
         try{
             fin = new FileInputStream(file);
@@ -164,6 +166,7 @@ public class Server {
     }
 
     public String getCurrentPath() {
-        return Objects.requireNonNull(getClass().getResource(File.separator)).getPath();
+        String path = Paths.get("").toAbsolutePath().toString();
+        return path;
     }
 }
