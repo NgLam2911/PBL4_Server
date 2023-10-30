@@ -34,16 +34,22 @@ public class Session extends Thread {
             String number = in.readUTF();
             Server.getInstance().getLogger().debug("Received buffer (number): " + number);
             Translator translator;
-            String result;
+            String eng, vie, fra;
             try{
                 translator = new Translator(number);
-                result = translator.translate(Translator.Language.ENGLISH);
-                Server.getInstance().getLogger().debug("Translated result: " + result);
+                eng = translator.translate(Translator.Language.ENGLISH);
+                Server.getInstance().getLogger().debug("Translated result (ENG): " + eng);
+                vie = translator.translate(Translator.Language.VIETNAMESE);
+                Server.getInstance().getLogger().debug("Translated result (VIE): " + vie);
+                fra = translator.translate(Translator.Language.FRENCH);
+                Server.getInstance().getLogger().debug("Translated result (FRA): " + fra);
             }catch (NumberFormatException nah){
-                result = "Invalid number";
-                Server.getInstance().getLogger().debug("Translated result: " + result);
+                eng = vie = fra = "Invalid number";
+                Server.getInstance().getLogger().debug("Translated result: " + eng);
             }
-            out.writeUTF(result);
+            out.writeUTF(eng);
+            out.writeUTF(vie);
+            out.writeUTF(fra);
             out.flush();
         } catch (IOException ignore) {
         } finally {
