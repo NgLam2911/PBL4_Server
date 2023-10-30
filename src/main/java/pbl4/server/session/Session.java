@@ -33,18 +33,11 @@ public class Session extends Thread {
 
             String number = in.readUTF();
             Server.getInstance().getLogger().debug("Received buffer (number): " + number);
-            String language = in.readUTF();
-            Server.getInstance().getLogger().debug("Received buffer (lang): " + language);
             Translator translator;
             String result;
             try{
                 translator = new Translator(number);
-                Translator.Language lang = Translator.Language.fromString(language);
-                if (lang != null){
-                    result = translator.translate(lang);
-                } else {
-                    result = "Invalid Language";
-                }
+                result = translator.translate(Translator.Language.ENGLISH);
                 Server.getInstance().getLogger().debug("Translated result: " + result);
             }catch (NumberFormatException nah){
                 result = "Invalid number";
