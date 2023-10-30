@@ -30,11 +30,11 @@ public class EnglishTranslator {
             number = number.abs();
         }
 
-        int[] triplets = Utils.toTriplets(number);
-        if (triplets.length == 0){
+        if (number.equals(BigInteger.ZERO)){
             return EnglishTranslator.zero;
         }
 
+        int[] triplets = Utils.toTriplets(number);
         for (int i = triplets.length - 1; i >= 0; i--) {
             String translatedTriplet = translateTriplet(triplets[i]);
             result.append(translatedTriplet);

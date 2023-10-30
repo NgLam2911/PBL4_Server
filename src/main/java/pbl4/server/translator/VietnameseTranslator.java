@@ -23,11 +23,11 @@ public class VietnameseTranslator {
             number = number.abs();
         }
 
-        int[] triplets = Utils.toTriplets(number);
-        if (triplets.length == 0){
+        if (number.equals(BigInteger.ZERO)){
             return "không";
         }
 
+        int[] triplets = Utils.toTriplets(number);
         for (int i = triplets.length - 1; i >= 0; i--) {
             String translatedTriplet = translateTriplet(triplets[i], i == triplets.length - 1);
             result.append(translatedTriplet);
