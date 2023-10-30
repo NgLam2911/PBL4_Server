@@ -47,7 +47,11 @@ public class Server {
         this.getLogger().info("Server started on port " + this.port);
         new InputThread().start();
         this.getLogger().debug("Enabled input thread");
-        this.test();
+        try{
+            this.test();
+        }catch (Exception e){
+            this.getLogger().error("Failed to run tests");
+        }
         //Listening new connection
         Socket socket;
         while (true) {
@@ -170,8 +174,7 @@ public class Server {
     }
 
     public String getCurrentPath() {
-        String path = Paths.get("").toAbsolutePath().toString();
-        return path;
+        return Paths.get("").toAbsolutePath().toString();
     }
 
     public void test(){
@@ -185,6 +188,10 @@ public class Server {
         this.singleTest("9433401");
         this.singleTest("32045");
         this.singleTest("123456789123456789");
+        this.singleTest("35737459098456963592010596234333442");
+        this.singleTest("-333222223444");
+        this.singleTest("-123456789123456789");
+        this.singleTest("-sdfafhsf");
 
         this.getLogger().debug("Test 1 done");
     }

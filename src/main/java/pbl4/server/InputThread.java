@@ -8,27 +8,19 @@ public class InputThread extends Thread{
     public void run() {
         Thread.currentThread().setName("Command");
         Scanner scanner = new Scanner(System.in);
-        while (true){
+        do {
             String input = scanner.nextLine();
             //Handle command
             String command = input.split(" ")[0];
             String[] args = input.substring(command.length()).trim().split(" ");
-            switch (command){
-                case "stop":
-                    Server.getInstance().stop();
-                    break;
-                case "say":
-                    Server.getInstance().getLogger().info("[Server] " + String.join(" ", args));
-                    break;
-                case "help":
-                    this.helpCmd();
-                    break;
-                default:
-                    Server.getInstance().getLogger().error("Unknown command. Type \"help\" for help.");
-                    break;
+            switch (command) {
+                case "stop" -> Server.getInstance().stop();
+                case "say" -> Server.getInstance().getLogger().info("[Server] " + String.join(" ", args));
+                case "help" -> this.helpCmd();
+                default -> Server.getInstance().getLogger().error("Unknown command. Type \"help\" for help.");
             }
             scanner.reset();
-        }
+        } while (!Thread.interrupted());
     }
 
     private void helpCmd(){
