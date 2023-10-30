@@ -2,6 +2,7 @@ package pbl4.server;
 
 import pbl4.server.session.Session;
 import pbl4.server.session.SessionManager;
+import pbl4.server.translator.Translator;
 import pbl4.server.utils.MainLogger;
 
 import java.io.*;
@@ -46,6 +47,7 @@ public class Server {
         this.getLogger().info("Server started on port " + this.port);
         new InputThread().start();
         this.getLogger().debug("Enabled input thread");
+        this.test();
         //Listening new connection
         Socket socket;
         while (true) {
@@ -170,5 +172,28 @@ public class Server {
     public String getCurrentPath() {
         String path = Paths.get("").toAbsolutePath().toString();
         return path;
+    }
+
+    public void test(){
+        this.getLogger().debug("Running tests...");
+        this.getLogger().debug("Test 1: Translator");
+
+        this.singleTest("123456789");
+        this.singleTest("0");
+        this.singleTest("1000000000");
+        this.singleTest("1000001");
+        this.singleTest("9433401");
+        this.singleTest("32045");
+        this.singleTest("123456789123456789");
+
+        this.getLogger().debug("Test 1 done");
+    }
+
+    public void singleTest(String number){
+        this.getLogger().debug("Number: " + number);
+        Translator translator = new Translator(number);
+        this.getLogger().debug("English: " + translator.translate(Translator.Language.ENGLISH));
+        this.getLogger().debug("Vietnamese: " + translator.translate(Translator.Language.VIETNAMESE));
+        this.getLogger().debug("French: " + translator.translate(Translator.Language.FRENCH));
     }
 }

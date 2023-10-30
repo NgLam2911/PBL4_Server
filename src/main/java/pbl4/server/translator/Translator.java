@@ -22,17 +22,17 @@ public class Translator{
     //Translator a number to a string
     //For example 1 -> "one"
 
-    private final long number;
+    private final BigInteger number;
 
     public Translator(String number) throws NumberFormatException{
-        this.number = Long.parseLong(number);
+        this.number = new BigInteger(number);
     }
 
-    public Translator(long number){
+    public Translator(BigInteger number){
         this.number = number;
     }
 
-    public long getNumber(){
+    public BigInteger getNumber(){
         return this.number;
     }
 
