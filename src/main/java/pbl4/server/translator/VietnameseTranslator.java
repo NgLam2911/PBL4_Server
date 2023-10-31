@@ -19,7 +19,7 @@ public class VietnameseTranslator {
     public static String translate(BigInteger number){
         StringBuilder result = new StringBuilder();
         if (number.compareTo(BigInteger.ZERO) < 0){
-            result.append(" âm");
+            result.append("âm ");
             number = number.abs();
         }
 

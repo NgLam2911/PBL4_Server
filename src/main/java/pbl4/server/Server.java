@@ -191,7 +191,7 @@ public class Server {
         this.singleTest("35737459098456963592010596234333442");
         this.singleTest("-333222223444");
         this.singleTest("-123456789123456789");
-        this.singleTest("-sdfafhsf");
+        this.singleTest("1556");
 
         this.getLogger().debug("Test 1 done");
     }

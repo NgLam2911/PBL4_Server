@@ -10,7 +10,8 @@ public class FrenchTranslator{
             "", "mille", "million", "milliard",
             "billion", "billiard", "trillion",
             "trilliard", "quadrillion", "quadrilliard",
-            "quintillion", "quintilliard"
+            "quintillion", "quintilliard", "sextillion",
+            "sextilliard", "septillion", "septilliard",
     };
     protected static String[] units = {"", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"};
     protected static String[] tens = {"", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante", "quatre-vingt", "quatre-vingt"};

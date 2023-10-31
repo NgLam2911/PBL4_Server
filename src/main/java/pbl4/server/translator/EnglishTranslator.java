@@ -17,21 +17,16 @@ public class EnglishTranslator {
     protected static String[] units = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
     protected static String[] tens = {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy","eighty", "ninety"};
     protected static String[] teens = {"", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen","seventeen", "eighteen", "nineteen"};
-    protected static String zero = "zero";
-    protected static String minus = "minus";
-    protected static String hundred = "hundred";
-    protected static String and = " and ";
-    protected static String link = "-";
 
     public static String translate(BigInteger number){
         StringBuilder result = new StringBuilder();
         if (number.compareTo(BigInteger.ZERO) < 0){
-            result.append(EnglishTranslator.minus).append(" ");
+            result.append("minus ");
             number = number.abs();
         }
 
         if (number.equals(BigInteger.ZERO)){
-            return EnglishTranslator.zero;
+            return "zero";
         }
 
         int[] triplets = Utils.toTriplets(number);
@@ -54,24 +49,24 @@ public class EnglishTranslator {
         int units = triplet % 10;
 
         if (hundreds > 0){
-            result += EnglishTranslator.units[hundreds] + " " + EnglishTranslator.hundred;
+            result += EnglishTranslator.units[hundreds] + " " + "hundred";
         }
 
         if (tens > 0){
             if (hundreds > 0){
-                result += EnglishTranslator.and;
+                result += " and ";
             }
             if (tens == 1 && units > 0){
                 result += EnglishTranslator.teens[units];
             } else {
                 result += EnglishTranslator.tens[tens];
                 if (units > 0){
-                    result += EnglishTranslator.link + EnglishTranslator.units[units];
+                    result += "-" + EnglishTranslator.units[units];
                 }
             }
         } else if (units > 0){
             if (hundreds > 0){
-                result += EnglishTranslator.and;
+                result += " and ";
             }
             result += EnglishTranslator.units[units];
         }
