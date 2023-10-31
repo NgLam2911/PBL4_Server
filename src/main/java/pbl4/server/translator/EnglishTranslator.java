@@ -12,7 +12,11 @@ public class EnglishTranslator {
             "trillion", "quadrillion", "quintillion",
             "sextillion", "septillion", "octillion",
             "nonillion", "decillion", "undecillion",
-            "duodecillion", "tredecillion", "quattuordecillion"
+            "duodecillion", "tredecillion", "quattuordecillion",
+            "quindecillion", "sexdecillion", "septendecillion",
+            "octodecillion", "novemdecillion", "vigintillion", // 10^63
+            "unvigintillion", "duovigintillion", "trevigintillion", // 10^93
+            "quattuorvigintillion", "quinvigintillion", "sexvigintillion", // 10^123
     };
     protected static String[] units = {"", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
     protected static String[] tens = {"", "ten", "twenty", "thirty", "forty", "fifty", "sixty", "seventy","eighty", "ninety"};

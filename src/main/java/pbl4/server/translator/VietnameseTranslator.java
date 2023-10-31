@@ -10,7 +10,11 @@ public class VietnameseTranslator {
             "nghìn tỷ", "triệu tỷ", "tỷ tỷ",
             "nghìn tỷ tỷ", "triệu tỷ tỷ", "tỷ tỷ tỷ",
             "nghìn tỷ tỷ tỷ", "triệu tỷ tỷ tỷ", "tỷ tỷ tỷ tỷ",
-            "nghìn tỷ tỷ tỷ tỷ", "triệu tỷ tỷ tỷ tỷ", "tỷ tỷ tỷ tỷ tỷ" //holy sh*t ...
+            "nghìn tỷ tỷ tỷ tỷ", "triệu tỷ tỷ tỷ tỷ", "tỷ tỷ tỷ tỷ tỷ",
+            "nghìn tỷ tỷ tỷ tỷ tỷ", "triệu tỷ tỷ tỷ tỷ tỷ", "tỷ tỷ tỷ tỷ tỷ tỷ", // 10^63
+            "nghìn tỷ tỷ tỷ tỷ tỷ tỷ", "triệu tỷ tỷ tỷ tỷ tỷ tỷ", "tỷ tỷ tỷ tỷ tỷ tỷ tỷ", // 10^93
+            "nghìn tỷ tỷ tỷ tỷ tỷ tỷ tỷ", "triệu tỷ tỷ tỷ tỷ tỷ tỷ tỷ", "tỷ tỷ tỷ tỷ tỷ tỷ tỷ tỷ", // 10^123
+            //Holy sh*t
     };
     protected static String[] units = {"", "một", "hai", "ba", "bốn", "năm", "sáu", "bảy", "tám", "chín"};
     protected static String[] unitsWithTens = {"", "mốt", "hai", "ba", "bốn", "lăm", "sáu", "bảy", "tám", "chín"};

@@ -12,6 +12,10 @@ public class FrenchTranslator{
             "trilliard", "quadrillion", "quadrilliard",
             "quintillion", "quintilliard", "sextillion",
             "sextilliard", "septillion", "septilliard",
+            "octillion", "octilliard", "nonillion",
+            "nonilliard", "decillion", "decilliard", // 10^63
+            "undecillion", "undecilliard", "duodecillion", // 10^93
+            "duodecilliard", "tredecillion", "tredecilliard", // 10^123
     };
     protected static String[] units = {"", "un", "deux", "trois", "quatre", "cinq", "six", "sept", "huit", "neuf"};
     protected static String[] tens = {"", "dix", "vingt", "trente", "quarante", "cinquante", "soixante", "soixante", "quatre-vingt", "quatre-vingt"};
