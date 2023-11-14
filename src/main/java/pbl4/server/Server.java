@@ -37,7 +37,7 @@ public class Server {
     }
 
     public void start() throws IOException {
-        this.logger = new MainLogger();
+        this.logger = new MainLogger("server.log");
         this.getLogger().info("Main logger initialized");
         this.getLogger().info("Loading properties");
         this.loadProperties();
@@ -154,6 +154,7 @@ public class Server {
             }
         }catch (IOException ignore){}
         this.getLogger().info("Server stopped");
+        this.getLogger().end();
         System.exit(0);
     }
 
