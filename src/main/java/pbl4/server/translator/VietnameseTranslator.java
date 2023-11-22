@@ -3,6 +3,7 @@ package pbl4.server.translator;
 import pbl4.server.utils.Utils;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class VietnameseTranslator {
     protected static String[] mega = {
@@ -21,9 +22,9 @@ public class VietnameseTranslator {
     protected static String[] tens = {"", "mười", "hai mươi", "ba mươi", "bốn mươi", "năm mươi", "sáu mươi", "bảy mươi", "tám mươi", "chín mươi"};
 
     public static String translate(BigInteger number){
-        StringBuilder result = new StringBuilder();
+        ArrayList<String> result = new ArrayList<>();
         if (number.compareTo(BigInteger.ZERO) < 0){
-            result.append("âm ");
+            result.add("âm");
             number = number.abs();
         }
 
@@ -36,43 +37,44 @@ public class VietnameseTranslator {
             if (triplets[i] == 0){
                 continue;
             }
-            result.append(translateTriplet(triplets[i], i == triplets.length - 1));
+            result.addAll(translateTriplet(triplets[i], i == triplets.length - 1));
             if (i > 0) {
-                result.append(" ").append(VietnameseTranslator.mega[i]).append(" ");
+                result.add(VietnameseTranslator.mega[i]);
             }
         }
-        return result.toString();
+        return String.join(" ", result);
     }
 
-    protected static String translateTriplet(int triplet, boolean isLastTriplet){
-        StringBuilder result = new StringBuilder();
+    protected static ArrayList<String> translateTriplet(int triplet, boolean isLastTriplet){
+        ArrayList<String> result = new ArrayList<>();
         int hundreds = triplet / 100;
         int tens = (triplet % 100) / 10;
         int units = triplet % 10;
 
         if (hundreds > 0 || !isLastTriplet) {
             if (hundreds > 0) {
-                result.append(VietnameseTranslator.units[hundreds]).append(" trăm ");
+                result.add(VietnameseTranslator.units[hundreds]);
+                result.add("trăm");
             } else {
-                result.append("không trăm ");
+                result.add("không trăm");
             }
             if (tens > 0) {
-                result.append(VietnameseTranslator.tens[tens]).append(" ");
+                result.add(VietnameseTranslator.tens[tens]);
             } else if (units > 0) {
-                result.append("lẻ ");
+                result.add("lẻ");
             }
         } else {
             if (tens > 0) {
-                result.append(VietnameseTranslator.tens[tens]).append(" ");
+                result.add(VietnameseTranslator.tens[tens]);
             }
         }
         if (units > 0){
             if (tens >= 2){
-                result.append(VietnameseTranslator.unitsWithTens[units]);
+                result.add(VietnameseTranslator.unitsWithTens[units]);
             } else {
-                result.append(VietnameseTranslator.units[units]);
+                result.add(VietnameseTranslator.units[units]);
             }
         }
-        return result.toString();
+        return result;
     }
 }

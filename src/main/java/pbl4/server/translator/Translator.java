@@ -7,16 +7,6 @@ public class Translator{
         ENGLISH,
         VIETNAMESE,
         FRENCH;
-
-        public static Language fromString(String lang){
-            lang = lang.toLowerCase();
-            return switch (lang) {
-                case "1", "english", "en", "eng" -> ENGLISH;
-                case "0", "vietnamese", "vi", "vie" -> VIETNAMESE;
-                case "2", "french", "fr", "fra" -> FRENCH;
-                default -> null;
-            };
-        }
     }
 
     //Translator a number to a string
@@ -38,14 +28,10 @@ public class Translator{
 
     public String translate(Language language){
         //TODO: Handle this.
-        switch (language){
-            case ENGLISH:
-                return EnglishTranslator.translate(this.number);
-            case VIETNAMESE:
-                return VietnameseTranslator.translate(this.number);
-            case FRENCH:
-                return FrenchTranslator.translate(this.number);
-        }
-        return "";
+        return switch (language) {
+            case ENGLISH -> EnglishTranslator.translate(this.number);
+            case VIETNAMESE -> VietnameseTranslator.translate(this.number);
+            case FRENCH -> FrenchTranslator.translate(this.number);
+        };
     }
 }

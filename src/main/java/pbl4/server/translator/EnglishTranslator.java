@@ -3,6 +3,7 @@ package pbl4.server.translator;
 import pbl4.server.utils.Utils;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class EnglishTranslator {
 
@@ -23,56 +24,56 @@ public class EnglishTranslator {
     protected static String[] teens = {"", "eleven", "twelve", "thirteen", "fourteen", "fifteen", "sixteen","seventeen", "eighteen", "nineteen"};
 
     public static String translate(BigInteger number){
-        StringBuilder result = new StringBuilder();
+        ArrayList<String> result = new ArrayList<>();
         if (number.compareTo(BigInteger.ZERO) < 0){
-            result.append("minus ");
+            result.add("minus");
             number = number.abs();
         }
 
         if (number.equals(BigInteger.ZERO)){
             return "zero";
         }
-
         int[] triplets = Utils.toTriplets(number);
         for (int i = triplets.length - 1; i >= 0; i--) {
             if (triplets[i] == 0){
                 continue;
             }
-            result.append(translateTriplet(triplets[i]));
+            result.addAll(translateTriplet(triplets[i]));
             if (i > 0){
-                result.append(" ").append(EnglishTranslator.mega[i]).append(" ");
+                result.add(EnglishTranslator.mega[i]);
             }
         }
-        return result.toString();
+        return String.join(" ", result);
     }
 
-    protected static String translateTriplet(int triplet){
-        String result = "";
+    protected static ArrayList<String> translateTriplet(int triplet){
+        ArrayList<String> result = new ArrayList<>();
         int hundreds = triplet / 100;
         int tens = (triplet % 100) / 10;
         int units = triplet % 10;
 
-        if (hundreds > 0){
-            result += EnglishTranslator.units[hundreds] + " " + "hundred";
+        if (hundreds > 0) {
+            result.add(EnglishTranslator.units[hundreds]);
+            result.add("hundred");
         }
-
-        if (tens > 0){
-            if (hundreds > 0){
-                result += " and ";
-            }
-            if (tens == 1 && units > 0){
-                result += EnglishTranslator.teens[units];
-            } else {
-                result += EnglishTranslator.tens[tens];
-                if (units > 0){
-                    result += "-" + EnglishTranslator.units[units];
+        if (tens == 0 && units == 0) {
+            return result;
+        }
+        switch (tens) {
+            case 0:
+                result.add(EnglishTranslator.units[units]);
+                break;
+            case 1:
+                result.add(EnglishTranslator.teens[units]);
+                break;
+            default:
+                if (units > 0) {
+                    String word = EnglishTranslator.tens[tens] + "-" + EnglishTranslator.units[units];
+                    result.add(word);
+                } else {
+                    result.add(EnglishTranslator.tens[tens]);
                 }
-            }
-        } else if (units > 0){
-            if (hundreds > 0){
-                result += " and ";
-            }
-            result += EnglishTranslator.units[units];
+                break;
         }
         return result;
     }

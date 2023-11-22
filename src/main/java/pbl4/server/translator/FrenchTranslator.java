@@ -3,6 +3,7 @@ package pbl4.server.translator;
 import pbl4.server.utils.Utils;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
 
 public class FrenchTranslator{
 
@@ -22,9 +23,9 @@ public class FrenchTranslator{
     protected static String[] teens = {"dix", "onze", "douze", "treize", "quatorze", "quinze", "seize", "dix-sept", "dix-huit", "dix-neuf"};
 
     public static String translate(BigInteger number){
-        StringBuilder result = new StringBuilder();
+        ArrayList<String> result = new ArrayList<>();
         if (number.compareTo(BigInteger.ZERO) < 0){
-            result.append("moins ");
+            result.add("moins");
             number = number.abs();
         }
 
@@ -38,87 +39,87 @@ public class FrenchTranslator{
                 continue;
             }
             if (triplets[i] == 1 && i == 1){ //Special case for 1000
-                result.append("mille");
+                result.add("mille");
             }
 
-            result.append(translateTriplet(triplets[i]));
+            result.addAll(translateTriplet(triplets[i]));
             if (i > 0){
                 String mega = FrenchTranslator.mega[i];
                 if (!mega.equals("mille") && triplets[i] > 1) {
                     mega += "s";
                 }
-                result.append(" ").append(mega).append(" ");
+                result.add(mega);
             }
         }
-        return result.toString();
+        return String.join(" ", result);
     }
 
-    protected static String translateTriplet(int triplet){
-        StringBuilder result = new StringBuilder();
+    protected static ArrayList<String> translateTriplet(int triplet){
+        ArrayList<String> result = new ArrayList<>();
         int hundreds = triplet / 100;
         int tens = (triplet % 100) / 10;
         int units = triplet % 10;
 
         if (hundreds > 0) {
             if (hundreds == 1) {
-                result.append(" cent ");
+                result.add("cent");
             } else {
-                result.append(FrenchTranslator.units[hundreds]);
+                result.add(FrenchTranslator.units[hundreds]);
                 if (tens == 0 && units == 0) {
-                    result.append(" cents");
-                    return result.toString();
+                    result.add("cents");
+                    return result;
                 } else {
-                    result.append(" cent ");
+                    result.add("cent");
                 }
             }
         }
         if (tens == 0 && units == 0) {
-            return result.toString();
+            return result;
         }
         switch (tens) {
             case 0:
-                result.append(FrenchTranslator.units[units]);
+                result.add(FrenchTranslator.units[units]);
                 break;
             case 1:
-                result.append(FrenchTranslator.teens[units]);
+                result.add(FrenchTranslator.teens[units]);
                 break;
             case 7:
                 if (units == 1) {
-                    result.append(FrenchTranslator.tens[tens]);
-                    result.append(" et ");
-                    result.append(FrenchTranslator.teens[units]);
+                    result.add(FrenchTranslator.tens[tens]);
+                    result.add("et");
+                    result.add(FrenchTranslator.teens[units]);
                 } else {
                     String word = FrenchTranslator.tens[tens] + "-" + FrenchTranslator.teens[units];
-                    result.append(word);
+                    result.add(word);
                 }
                 break;
             case 8:
                 if (units == 0) {
-                    result.append(FrenchTranslator.tens[tens]).append("s");
+                    result.add(FrenchTranslator.tens[tens] + "s");
                 } else {
                     String word = FrenchTranslator.tens[tens] + "-" + FrenchTranslator.units[units];
-                    result.append(word);
+                    result.add(word);
                 }
                 break;
             case 9:
                 String word = FrenchTranslator.tens[tens] + "-" + FrenchTranslator.teens[units];
-                result.append(word);
+                result.add(word);
                 break;
             default:
                 switch (units) {
-                    case 0 -> result.append(FrenchTranslator.tens[tens]);
+                    case 0 -> result.add(FrenchTranslator.tens[tens]);
                     case 1 -> {
-                        result.append(FrenchTranslator.tens[tens]);
-                        result.append(" et ");
-                        result.append(FrenchTranslator.units[units]);
+                        result.add(FrenchTranslator.tens[tens]);
+                        result.add("et");
+                        result.add(FrenchTranslator.units[units]);
                     }
                     default -> {
                         word = FrenchTranslator.tens[tens] + "-" + FrenchTranslator.units[units];
-                        result.append(word);
+                        result.add(word);
                     }
                 }
                 break;
         }
-        return result.toString();
+        return result;
     }
 }

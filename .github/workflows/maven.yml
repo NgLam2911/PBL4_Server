@@ -34,7 +34,7 @@ jobs:
     - name: Upload Artifact
       uses: actions/upload-artifact@v3
       with:
-        name: PBL4_Server-1.0-SNAPSHOT
-        path: target/PBL4_Server-1.0.0.jar
+        name: PBL4-Server
+        path: target/PBL4_Server-1.0.1.jar
 
 
