@@ -17,7 +17,7 @@ public class InputThread extends Thread{
                 case "stop" -> Server.getInstance().stop();
                 case "say" -> Server.getInstance().getLogger().info("[Server] " + String.join(" ", args));
                 case "help" -> this.helpCmd();
-                default -> Server.getInstance().getLogger().error("Unknown command. Type \"help\" for help.");
+                default -> Server.getInstance().getLogger().error("Unknown command. Type \"help\" for available commands.");
             }
             scanner.reset();
         } while (!Thread.interrupted());
